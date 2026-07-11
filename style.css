@@ -15,6 +15,12 @@ body {
   user-select: none;
 }
 
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .wrapper {
   position: relative;
 }
@@ -23,6 +29,48 @@ body {
   display: flex;
   gap: 20px;
   align-items: flex-start;
+}
+
+/* ---- Título estilo Tetris ---- */
+.game-title {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 28px;
+  font-family: 'Press Start 2P', 'Courier New', Courier, monospace;
+}
+
+.game-title span {
+  display: inline-block;
+  font-size: 32px;
+  line-height: 1;
+  padding: 10px 8px 6px;
+  border-radius: 3px;
+  color: #0f0f17;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset -4px -4px 0 rgba(0, 0, 0, 0.3),
+    inset 4px 4px 0 rgba(255, 255, 255, 0.35),
+    0 4px 0 rgba(0, 0, 0, 0.5);
+  animation: title-drop 0.5s ease both;
+}
+
+.game-title span:nth-child(1) { background: #2dd4f0; animation-delay: 0s; }   /* I - cian */
+.game-title span:nth-child(2) { background: #f0e02d; animation-delay: 0.05s; } /* O - amarillo */
+.game-title span:nth-child(3) { background: #b02df0; animation-delay: 0.1s; }  /* T - morado */
+.game-title span:nth-child(4) { background: #2df06e; animation-delay: 0.15s; } /* S - verde */
+.game-title span:nth-child(5) { background: #f0392d; animation-delay: 0.2s; }  /* Z - rojo */
+.game-title span:nth-child(6) { background: #f0972d; animation-delay: 0.25s; } /* L - naranja */
+
+@keyframes title-drop {
+  from {
+    transform: translateY(-24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 #board {
