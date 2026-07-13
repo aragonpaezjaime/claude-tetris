@@ -31,36 +31,49 @@ body {
   align-items: flex-start;
 }
 
-/* ---- Título estilo Tetris ---- */
+/* ---- Título estilo Tetris (neón arcade) ---- */
 .game-title {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  margin-bottom: 28px;
+  gap: 4px;
+  margin-bottom: 40px;
   font-family: 'Press Start 2P', 'Courier New', Courier, monospace;
 }
 
 .game-title span {
   display: inline-block;
-  font-size: 32px;
+  font-size: 60px;
   line-height: 1;
-  padding: 10px 8px 6px;
-  border-radius: 3px;
-  color: #0f0f17;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.25);
-  box-shadow:
-    inset -4px -4px 0 rgba(0, 0, 0, 0.3),
-    inset 4px 4px 0 rgba(255, 255, 255, 0.35),
-    0 4px 0 rgba(0, 0, 0, 0.5);
-  animation: title-drop 0.5s ease both;
+  background: none;
+  animation: title-drop 0.5s ease both, neon-flicker 3s linear infinite;
 }
 
-.game-title span:nth-child(1) { background: #2dd4f0; animation-delay: 0s; }   /* I - cian */
-.game-title span:nth-child(2) { background: #f0e02d; animation-delay: 0.05s; } /* O - amarillo */
-.game-title span:nth-child(3) { background: #b02df0; animation-delay: 0.1s; }  /* T - morado */
-.game-title span:nth-child(4) { background: #2df06e; animation-delay: 0.15s; } /* S - verde */
-.game-title span:nth-child(5) { background: #f0392d; animation-delay: 0.2s; }  /* Z - rojo */
-.game-title span:nth-child(6) { background: #f0972d; animation-delay: 0.25s; } /* L - naranja */
+.game-title span:nth-child(odd) {
+  color: #6ff3ff;
+  text-shadow:
+    0 0 4px #ffffff,
+    0 0 10px #2dd4f0,
+    0 0 20px #2dd4f0,
+    0 0 40px #0891b2,
+    0 0 80px #0891b2;
+}
+
+.game-title span:nth-child(even) {
+  color: #ff9df7;
+  text-shadow:
+    0 0 4px #ffffff,
+    0 0 10px #f02de0,
+    0 0 20px #f02de0,
+    0 0 40px #a021b0,
+    0 0 80px #a021b0;
+}
+
+.game-title span:nth-child(1) { animation-delay: 0s, 0s; }
+.game-title span:nth-child(2) { animation-delay: 0.05s, 0.3s; }
+.game-title span:nth-child(3) { animation-delay: 0.1s, 0.6s; }
+.game-title span:nth-child(4) { animation-delay: 0.15s, 0.9s; }
+.game-title span:nth-child(5) { animation-delay: 0.2s, 1.2s; }
+.game-title span:nth-child(6) { animation-delay: 0.25s, 1.5s; }
 
 @keyframes title-drop {
   from {
@@ -70,6 +83,18 @@ body {
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@keyframes neon-flicker {
+  0%, 3%, 6%, 100% { opacity: 1; }
+  4% { opacity: 0.4; }
+  5% { opacity: 0.85; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-title span {
+    animation: title-drop 0.5s ease both;
   }
 }
 
