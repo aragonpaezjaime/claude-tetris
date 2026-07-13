@@ -41,4 +41,3 @@ jobs:
             (Lista numerada de pasos concretos para implementarlo, incluyendo archivos afectados si se pueden inferir. Deja explícito que este plan requiere aprobación humana antes de ejecutarse.)
 
             No implementes nada, no crees ramas ni PRs. Solo publica el comentario de análisis.
-          claude_args: '--allowed-tools "Bash(gh issue comment:*)"'
