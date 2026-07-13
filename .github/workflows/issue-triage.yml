@@ -1,0 +1,46 @@
+name: Issue Triage
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: read
+      id-token: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Triage issue
+        id: triage
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Analiza el issue #${{ github.event.issue.number }} (título: "${{ github.event.issue.title }}").
+
+            Lee el cuerpo del issue y el contexto del proyecto (CLAUDE.md), y publica UN solo comentario
+            en el issue usando `gh issue comment`. El comentario debe ser Markdown puro con esta estructura:
+
+            ## Resumen reformateado
+            (El issue reescrito de forma clara y estructurada, preservando la intención del autor.)
+
+            ## Análisis de viabilidad
+            (¿Es técnicamente viable dado el estado actual del código? Ambigüedades, dependencias, riesgos.)
+
+            ## Validez
+            (¿Es bug, feature, duda o no aplica? ¿Está bien definido o falta información clave?)
+
+            ## Plan de trabajo propuesto (pendiente de aprobación)
+            (Lista numerada de pasos concretos, con archivos afectados si se pueden inferir.
+            Deja explícito que este plan requiere aprobación humana antes de ejecutarse.)
+
+            No implementes nada. No crees ramas ni PRs. Solo publica el comentario de análisis.
