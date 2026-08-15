@@ -41,4 +41,6 @@ Single global-scope script (`'use strict'`), loaded via plain `<script src>` at 
 
 ## GitHub automation
 
-`.github/workflows/` runs `anthropics/claude-code-action@v1` in three places: `claude.yml` (responds to `@claude` mentions in issues/PR comments/reviews), `claude-code-review.yml` (automatic review on PR open/sync), and `issue-triage.yml` (labels and comments on newly opened issues, with a Spanish prompt and a narrow `--allowedTools` allowlist). All authenticate via the `CLAUDE_CODE_OAUTH_TOKEN` secret. Editing a workflow's `allowedTools` or permissions block changes what the bot can do in CI.
+**All three workflows are disabled** (`disabled_manually` on GitHub). The files stay in `.github/workflows/` but never trigger. This is deliberate: the repo is solo-developed directly through Claude Code on the local machine, GitHub serves only as cloud backup, and CI cannot run the hardware-dependent checks that matter. Do not re-enable them without asking; do not add new workflows.
+
+The files are `anthropics/claude-code-action@v1` in three places: `claude.yml` (responds to `@claude` mentions in issues/PR comments/reviews), `claude-code-review.yml` (automatic review on PR open/sync), and `issue-triage.yml` (labels and comments on newly opened issues, with a Spanish prompt and a narrow `--allowedTools` allowlist). All authenticate via the `CLAUDE_CODE_OAUTH_TOKEN` secret. Re-enable with `gh workflow enable <id>`.
